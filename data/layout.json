@@ -1,0 +1,38 @@
+{
+  "transactions.tsv": [
+    "event",
+    "serial",
+    "edition",
+    "site",
+    "day",
+    "received",
+    "kind",
+    "order"
+  ],
+  "reviews.tsv": [
+    "check",
+    "serial",
+    "basis",
+    "day",
+    "outcome"
+  ],
+  "policies.tsv": [
+    "edition",
+    "max_false_hold",
+    "capacity",
+    "delay"
+  ],
+  "commitments.tsv": [
+    "order",
+    "serial",
+    "promised",
+    "deadline",
+    "personnel"
+  ],
+  "suggestions.tsv": [
+    "serial",
+    "issued",
+    "owner",
+    "state"
+  ]
+}
