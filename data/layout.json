@@ -34,5 +34,48 @@
     "issued",
     "owner",
     "state"
+  ],
+  "register.tsv": [
+    "serial",
+    "edition",
+    "mark",
+    "custody",
+    "grade",
+    "created"
+  ],
+  "unresolved_edges.tsv": [
+    "evidence",
+    "event_key",
+    "candidate",
+    "site",
+    "day",
+    "received",
+    "kind",
+    "order"
+  ],
+  "requests.tsv": [
+    "request",
+    "targets",
+    "available",
+    "turnaround",
+    "minutes",
+    "access"
+  ],
+  "actual_replies.tsv": [
+    "reply",
+    "request",
+    "issued",
+    "received",
+    "outcome",
+    "event_key",
+    "serial"
+  ],
+  "shift_capacity.tsv": [
+    "shift",
+    "day",
+    "access",
+    "minutes",
+    "sampled",
+    "inclusion"
   ]
 }

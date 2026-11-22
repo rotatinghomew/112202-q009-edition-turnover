@@ -1,0 +1,6 @@
+request	targets	available	turnaround	minutes	access
+RQ1	E-U17,E-U18	6	1,2	12	desk-N,desk-S
+RQ2	E-U18	6	0,2	9	desk-S
+RQ3	E-U19	7	1,3	12	desk-N
+RQ4	E-U35	8	1,2	8	desk-N,desk-S
+RQ5	E-U17,E-U19	7	0,1	18	desk-N,desk-S

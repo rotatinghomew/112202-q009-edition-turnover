@@ -1,0 +1,6 @@
+shift	day	access	minutes	sampled	inclusion
+SH1	6	desk-N,desk-S	20	rotation	0.25
+SH2	7	desk-N	14	clue	?
+SH3	8	desk-N,desk-S	16	rotation	0.30
+SH4	9	desk-N,desk-S	25	clue	?
+SH5	10	desk-S	12	rotation	0.20

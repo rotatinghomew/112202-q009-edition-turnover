@@ -1,0 +1,9 @@
+evidence	event_key	candidate	site	day	received	kind	order
+EV1	E-U17	N-017	north	5	5	display	-
+EV2	E-U17	N-018	north	5	5	display	-
+EV3	E-U18	N-017	south	6	6	held	O1
+EV4	E-U18	N-018	south	6	6	held	O1
+EV5	E-U19	N-018	south	7	7	handed	B018
+EV6	E-U19	N-019	south	7	7	handed	B018
+EV7	E-U35	N-035	north	8	8	cancel	P5
+EV8	E-U35	N-036	north	8	8	cancel	P5

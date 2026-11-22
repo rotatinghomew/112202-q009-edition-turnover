@@ -1,0 +1,5 @@
+reply	request	issued	received	outcome	event_key	serial
+RR1	RQ1	6	8	confirmed	E-U17	N-018
+RR2	RQ1	6	8	confirmed	E-U18	N-017
+RR3	RQ3	7	9	waiting	E-U19	?
+RR4	RQ4	8	10	confirmed	E-U35	N-036
