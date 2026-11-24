@@ -9,9 +9,57 @@
 ```sh
 python3 inspect_packet.py
 python3 -m unittest discover -s tests
+
+# 时点看板（默认知识截止到资料中的最大 received/day=12）
+python3 cabinet_audit.py report
+python3 cabinet_audit.py report --at 9
+python3 cabinet_audit.py vouchers --at 8 --shift SH3 --format json
+python3 cabinet_audit.py scenarios RQ4 --at 8
+python3 cabinet_audit.py cases --at 12
+python3 cabinet_audit.py policy --at 12
+python3 cabinet_audit.py shifts
+python3 cabinet_audit.py replay
 ```
 
-前一条命令只检查表头和记录形状并显示行数。可传入另一目录读取同格式记录。当前没有分析、决策或业务处理结果。
+`inspect_packet.py` 只检查表头和记录形状并显示行数。`cabinet_audit.py`
+提供只读的时点匹配、指标区间、凭证情景、联合主案和历史回演；它不会把
+后来收到的记录回放到更早的 `--at` 时点。
+
+## 分析口径
+
+- 唯一库存/销量单位是发行编号 `serial`。换渠道透视时，同一编号仍只计一次；
+  事件站点用于追踪跨柜历程，不把同一件在南北柜各加一件。
+- `--at d` 表示只使用 `received <= d` 的交易/回执，以及 `day <= d` 的复核和班次。
+  交易的实际发生日 `day` 与可知日 `received` 分开保留。
+- `unresolved_edges.tsv` 的每个 `event_key` 是一个未知编号事件，候选不带概率。
+  程序枚举全部候选组合，再排除会让同一编号在无撤销/退货间隔时承担两个互斥
+  出库订单的匹配。被排除组合仍在 JSON 的 `all_world_assignments` 中留痕；
+  若真实回执直接确认该组合，应转为硬冲突主案，而不是假装该回执不存在。
+- `register.grade` 只直接覆盖 5 个编号。看板同时给 `direct_grade=未登记`
+  和依据“已登记样本中 etched=standard、stone=premium”得到的推断价带；
+  两个口径不混用。
+- 复核表的全部记录都恰好位于首次上架后第 5 天，因此 `review_board` 以 5 天
+  作为资料中可观察到的复核节奏。这不是 `policies.delay` 的替代解释；
+  建议单 SLA 仍按 `issued + policies.delay` 单独判断。
+- 资料没有记录某次 `legit` 复核是否实际导致搁置，因此无法从现有字段计算
+  `max_false_hold` 的真实比率；不能把随机复核的 legit 比例直接当作误搁率。
+
+## 下一班从哪里接手
+
+先读 `HANDOFF.md`，再用：
+
+```sh
+python3 cabinet_audit.py cases --at 12
+python3 cabinet_audit.py direction --at 12
+python3 cabinet_audit.py vouchers --at 12 --format json
+python3 cabinet_audit.py item N-035 --at 12
+```
+
+待回执、待决定和可新发凭证是不同状态：`pending_replies` / `vouchers`
+中的 `receipt_window_open`、`receipt_due_today` 表示等回执；
+`expired_without_confirmation` 才进入待决定；未发的 RQ5 是当前唯一仍有
+未覆盖目标的候选凭证。重叠请求按并集计算，不能把 RQ3 与 RQ5 对 E-U19
+的风险/库存影响相加。
 
 ## 输入表
 
